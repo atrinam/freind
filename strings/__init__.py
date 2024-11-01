@@ -1,12 +1,3 @@
-#
-# Copyright (C) 2024 by TheTeamVivek@Github, < https://github.com/TheTeamVivek >.
-#
-# This file is part of < https://github.com/TheTeamVivek/YukkiMusic > project,
-# and is released under the MIT License.
-# Please see < https://github.com/TheTeamVivek/YukkiMusic/blob/master/LICENSE >
-#
-# All rights reserved
-
 import os
 import sys
 from typing import List
@@ -55,6 +46,6 @@ for filename in os.listdir(r"./strings/langs/"):
         languages_present[language_name] = languages[language_name]["name"]
     except:
         print(
-            "There is some issue with the language file inside bot. Please report it to the TheTeamvk at @TheTeamvk on Telegram"
+            "There is some issue with the language file inside bot. Please report it to the Team AllBot at on Telegram"
         )
         sys.exit()
