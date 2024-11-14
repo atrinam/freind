@@ -141,7 +141,7 @@ async def authusers(client, message: Message, _):
         await message.reply_text(text)
 
 
-__MODULE__ = "تاید هویت"
+__MODULE__ = "تایید هویت"
 __HELP__ = """
 
 <b>استفاده‌کنندگان AUTH می‌توانند از دستورات ADMIN بدون نیاز به حقوق ADMIN در چت شما استفاده کنند.</b>
