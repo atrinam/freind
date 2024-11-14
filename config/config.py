@@ -200,7 +200,7 @@ autoclean = []
 
 START_IMG_URL = getenv(
     "START_IMG_URL",
-    "https://files.catbox.moe/7qlvvb.jpg",
+    "https://i.imgur.com/ZHI4mkg.jpeg",
 )
 
 PING_IMG_URL = getenv(
@@ -220,7 +220,7 @@ GLOBAL_IMG_URL = getenv(
 
 STATS_IMG_URL = getenv(
     "STATS_IMG_URL",
-    "https://telegra.ph/file/4dd9e2c231eaf7c290404.jpg",
+    "https://i.imgur.com/ZHI4mkg.jpeg",
 )
 
 TELEGRAM_AUDIO_URL = getenv(
@@ -235,7 +235,7 @@ TELEGRAM_VIDEO_URL = getenv(
 
 STREAM_IMG_URL = getenv(
     "STREAM_IMG_URL",
-    "https://telegra.ph/file/e24f4a5f695ec5576a8f3.jpg",
+    "https://i.imgur.com/ZHI4mkg.jpeg",
 )
 
 SOUNCLOUD_IMG_URL = getenv(
@@ -302,7 +302,7 @@ if GITHUB_REPO:
 
 
 if PING_IMG_URL:
-    if PING_IMG_URL != "https://telegra.ph/file/91533956c91d0fd7c9f20.jpg":
+    if PING_IMG_URL != "https://i.imgur.com/ZHI4mkg.jpeg":
         if not re.match("(?:http|https)://", PING_IMG_URL):
             print(
                 "[ERROR] - Your PING_IMG_URL url is wrong. Please ensure that it starts with https://"
