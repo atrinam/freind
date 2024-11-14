@@ -338,7 +338,7 @@ class Call(PyTgCalls):
                     )
                 except Exception:
                     raise AssistantErr(
-                        f"**» چت فعالی پیدا نشد.**\n\nلطفا از فعال بودن چت خود را مطما کنید ."
+                        f"**» چت فعالی پیدا نشد.**\n\nلطفا از فعال بودن چت خود را مطمئن کنید ."
                     )
 
         except AlreadyJoinedError:
