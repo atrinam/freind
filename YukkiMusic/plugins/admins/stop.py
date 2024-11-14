@@ -20,7 +20,7 @@ from YukkiMusic.utils.database import (
 
 
 @app.on_message(
-    filters.command(["stop", "end", "cstop", "cend","ختم","کانال ختم"]  ,
+    filters.command(["stop", "end", "cstop", "cend","اتمام","کانال ختم"]  ,
         prefixes=["", "/"]) & filters.group & ~BANNED_USERS
 )
 async def stop_music(cli, message: Message):
@@ -35,7 +35,7 @@ async def stop_music(cli, message: Message):
                 filter = " ".join(message.command[1:])
                 deleted = await delete_filter(message.chat.id, filter)
                 if deleted:
-                    return await message.reply_text(f"**فلتر حذف شد {filter}.**")
+                    return await message.reply_text(f"**فلیتر حذف شد {filter}.**")
                 else:
                     return await message.reply_text("**پوشه ای یافت نشد.**")
 
