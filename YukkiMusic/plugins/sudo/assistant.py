@@ -20,7 +20,7 @@ async def set_pfp(client, message):
         photo = await message.reply_to_message.download()
         try:
             await client.set_profile_photo(photo=photo)
-            await eor(message, text="موفقیت تغییر یافت .")
+            await eor(message, text="موفقانه تغیر یافت .")
             os.remove(photo)
         except Exception as e:
             await eor(message, text=e)
@@ -39,7 +39,7 @@ async def set_bio(client, message):
             bio = message.text.split(None, 1)[1]
         try:
             await client.update_profile(bio=bio)
-            await eor(message, text="بیو تغییر کرد.")
+            await eor(message, text="بیو تغیر کرد.")
         except Exception as e:
             await eor(message, text=e)
     else:
@@ -58,7 +58,7 @@ async def set_name(client, message):
             name = message.text.split(None, 1)[1]
         try:
             await client.update_profile(first_name=name)
-            await eor(message, text=f"نام تغییر کرد به  {name} .")
+            await eor(message, text=f"نام تغیر کرد به  {name} .")
         except Exception as e:
             await eor(message, text=e)
     else:
