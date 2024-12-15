@@ -27,7 +27,7 @@ from YukkiMusic.utils.formatters import seconds_to_min, time_to_seconds
 USE_COOKIES_ONLY = False
 
 def cookies():
-    folder_path = f"{os.getcwd()}/cookies"
+    folder_path = f"{os.getcwd()}/YukkiMusic/utils/cookies"
     txt_files = glob.glob(os.path.join(folder_path, "*.txt"))
     if not txt_files:
         raise FileNotFoundError("No .txt files found in the specified folder.")
