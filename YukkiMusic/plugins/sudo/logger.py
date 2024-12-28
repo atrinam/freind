@@ -1,17 +1,12 @@
-from pyrogram import filters
-
 import config
-from strings import get_command
+from strings import command
 from YukkiMusic import app
 from YukkiMusic.misc import SUDOERS
 from YukkiMusic.utils.database import add_off, add_on
 from YukkiMusic.utils.decorators.language import language
 
-# Commands
-LOGGER_COMMAND = get_command("LOGGER_COMMAND")
 
-
-@app.on_message(filters.command(LOGGER_COMMAND , prefixes=["", "/"]) & SUDOERS)
+@app.on_message(command("LOGGER_COMMAND",prefixes=["", "/"]) & SUDOERS)
 @language
 async def logger(client, message, _):
     usage = _["log_1"]
