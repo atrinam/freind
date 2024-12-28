@@ -1,31 +1,29 @@
 import logging
 import os
-import sys
 from os import listdir, mkdir
 
 from config import TEMP_DB_FOLDER
 
+# remove all files on startup  that contains these extentions
+files = [
+    ".jpg",
+    ".jpeg",
+    ".mp3",
+    ".m4a",
+    ".mp4",
+    ".webm",
+    ".png",
+    ".session",
+    ".session-journal",
+]
+
 
 def dirr():
-    assets_folder = "assets"
     downloads_folder = "downloads"
     cache_folder = "cache"
 
-    if assets_folder not in listdir():
-        logging.warning(
-            f"{assets_folder} پوشه ای پیدا نشد لطفا دوباره ریپازیتوری را بگیرید."
-        )
-        sys.exit()
-
     for file in os.listdir():
-        if (
-            file.endswith(".jpg")
-            or file.endswith(".jpeg")
-            or file.endswith(".mp3")
-            or file.endswith(".png")
-            or file.endswith(".session")
-            or file.endswith(".session-journal")
-        ):
+        if any(file.endswith(ext) for ext in files):
             os.remove(file)
 
     if downloads_folder not in listdir():
