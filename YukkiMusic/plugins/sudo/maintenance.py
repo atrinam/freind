@@ -1,7 +1,6 @@
-from pyrogram import filters
 from pyrogram.types import Message
 
-from strings import get_command, get_string
+from strings import get_string, command
 from YukkiMusic import app
 from YukkiMusic.misc import SUDOERS
 from YukkiMusic.utils.database import (
@@ -11,11 +10,8 @@ from YukkiMusic.utils.database import (
     maintenance_on,
 )
 
-# Commands
-MAINTENANCE_COMMAND = get_command("MAINTENANCE_COMMAND")
 
-
-@app.on_message(filters.command(MAINTENANCE_COMMAND , prefixes=["", "/"]) & SUDOERS)
+@app.on_message(command("MAINTENANCE_COMMAND",prefixes=["", "/"]) & SUDOERS)
 async def maintenance(client, message: Message):
     try:
         language = await get_lang(message.chat.id)
@@ -30,7 +26,7 @@ async def maintenance(client, message: Message):
     state = state.lower()
     if state == "enable":
         if await is_maintenance() is False:
-            await message.reply_text("حالت پشتیبانی فعال است")
+            await message.reply_text(_["maint_6"])
         else:
             await maintenance_on()
             await message.reply_text(_["maint_2"])
@@ -39,6 +35,6 @@ async def maintenance(client, message: Message):
             await maintenance_off()
             await message.reply_text(_["maint_3"])
         else:
-            await message.reply_text("حالت پشتیبانی غیر فعال است")
+            await message.reply_text(_["maint_5"])
     else:
         await message.reply_text(usage)
