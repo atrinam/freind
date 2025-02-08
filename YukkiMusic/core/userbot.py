@@ -1,17 +1,8 @@
-#
-# Copyright (C) 2024 by TheTeamVivek@Github, < https://github.com/TheTeamVivek >.
-#
-# This file is part of < https://github.com/TheTeamVivek/YukkiMusic > project,
-# and is released under the MIT License.
-# Please see < https://github.com/TheTeamVivek/YukkiMusic/blob/master/LICENSE >
-#
-# All rights reserved.
-#
 import asyncio
 import sys
 
 from pyrogram import Client
-from pyrogram.errors import ChatWriteForbidden
+
 import config
 
 from ..logging import LOGGER
@@ -23,16 +14,15 @@ assistantids = []
 class Userbot(Client):
     def __init__(self):
         self.clients = []
-        self.sessions = config.STRING_SESSIONS
+        session_strings = config.STRING_SESSIONS
 
-        for i, session in enumerate(self.sessions, start=1):
+        for i, session in enumerate(session_strings, start=1):
 
             client = Client(
                 f"YukkiString{i}",
                 api_id=config.API_ID,
                 api_hash=config.API_HASH,
                 in_memory=True,
-                no_updates=True,
                 session_string=session.strip(),
             )
             self.clients.append(client)
@@ -42,17 +32,7 @@ class Userbot(Client):
         try:
             await client.start()
             assistants.append(index)
-            try:
-                await client.send_message(config.LOG_GROUP_ID, "Assistant Started")
-            except ChatWriteForbidden:
-                try:
-                    await client.join_chat(config.LOG_GROUP_ID)
-                    await client.send_message(config.LOG_GROUP_ID, "Assistant Started")
-                except Exception:
-                    LOGGER(__name__).error(
-                        f"Assistant Account {index} has failed to send message in Loggroup Make sure you have added assistsant in Loggroup."
-                    )
-                    sys.exit(1)
+            await client.send_message(config.LOG_GROUP_ID, "دستیار شروع به کار کرد")
 
             get_me = await client.get_me()
             client.username = get_me.username
@@ -78,11 +58,3 @@ class Userbot(Client):
         """Gracefully stop all clients."""
         tasks = [client.stop() for client in self.clients]
         await asyncio.gather(*tasks)
-    
-    def __getattr__(self, name):
-        if not self.clients:
-            raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
-        first_client = self.clients[0]
-        if hasattr(first_client, name):
-            return getattr(first_client, name)
-        raise AttributeError(f"'{type(first_client).__name__}' object has no attribute '{name}'")
