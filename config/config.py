@@ -1,28 +1,34 @@
-
 import re
 import sys
 from os import getenv
-
-
 from dotenv import load_dotenv
 from pyrogram import filters
 
 load_dotenv()
 
+# تنظیمات اصلی
+API_ID = int(getenv("API_ID", "29135868"))
+API_HASH = getenv("API_HASH", "04dc2f1bdf0049f6990ed2eb3d10f2ec")
+BOT_TOKEN = getenv("BOT_TOKEN", "7983825127:AAHK3VmyDX0WOYo0tSMle0yhBOkO2WD")
+MONGO_DB_URI = getenv("MONGO_DB_URI", "mongodb+srv://gpsfardi:mohaMmoha900@cluster0.fj1u6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+LOG_GROUP_ID = int(getenv("LOG_GROUP_ID", "-1002288775154"))
+OWNER_ID = list(map(int, getenv("OWNER_ID", "1303275036").split()))
 
-# Get it from my.telegram.org
+# تنظیمات اضافی
 
-API_ID = int(getenv("API_ID", ""))
-
-API_HASH = getenv("API_HASH")
+# تنظیمات اکانت دستیار
 
 
-## Get it from @Botfather in Telegram.
-BOT_TOKEN = getenv("BOT_TOKEN")
+# خواندن STRING_SESSIONS و تقسیم آن به لیستی از سشن‌ها
+sessions = getenv("STRING_SESSIONS", "").split()
 
+# تعریف متغیرهای STRING1 تا STRING5
+STRING1 = sessions[0] if len(sessions) >= 1 else None
+STRING2 = sessions[1] if len(sessions) >= 2 else None
+STRING3 = sessions[2] if len(sessions) >= 3 else None
+STRING4 = sessions[3] if len(sessions) >= 4 else None
+STRING5 = sessions[4] if len(sessions) >= 5 else None
 
-# Database to save your chats and stats... Get MongoDB:-  https://telegra.ph/How-To-get-Mongodb-URI-04-06
-MONGO_DB_URI = getenv("MONGO_DB_URI", None)
 
 CLEANMODE_DELETE_MINS = int(
     getenv("CLEANMODE_MINS", "5")
@@ -38,7 +44,7 @@ DURATION_LIMIT_MIN = int(
 
 EXTRA_PLUGINS = getenv(
     "EXTRA_PLUGINS",
-    "True",
+    "False",
 )
 
 # Fill True if you want to load extra plugins
@@ -47,6 +53,7 @@ EXTRA_PLUGINS = getenv(
 EXTRA_PLUGINS_REPO = getenv(
     "EXTRA_PLUGINS_REPO",
     "https://github.com/AtroMusic/Atro_music_plugin",
+    # "https://github.com/TheTeamVivek/Extra-Plugin",
 )
 # Fill here the external plugins repo where plugins that you want to load
 
@@ -63,13 +70,21 @@ SONG_DOWNLOAD_DURATION = int(
 
 
 # You'll need a Private Group ID for this.
-LOG_GROUP_ID = getenv("LOG_GROUP_ID", "")
+LOG_GROUP_ID = int(getenv("LOG_GROUP_ID", "-1002288775154"))
 
 
 # Your User ID.
 OWNER_ID = list(
-    map(int, getenv("OWNER_ID", "6864201346").split())
+    map(int, getenv("OWNER_ID", "1303275036").split())
 )  # Input type must be interger
+
+
+# make your bots privacy from telegra.ph and put your url here
+
+PRIVACY_LINK = getenv(
+    "PRIVACY_LINK", "https://telegra.ph/Privacy-Policy-for-YukkiMusic-08-30"
+)
+
 
 # Get it from http://dashboard.heroku.com/account
 HEROKU_API_KEY = getenv("HEROKU_API_KEY")
@@ -81,7 +96,7 @@ HEROKU_APP_NAME = getenv("HEROKU_APP_NAME")
 # For customized or modified Repository
 UPSTREAM_REPO = getenv(
     "UPSTREAM_REPO",
-    "https://github.com/TheTeamVivek/YukkiMusic",
+    "https://github.com/Vivekkumar0708/freind", # Don't change it 
 )
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "master")
 
@@ -94,10 +109,10 @@ GIT_TOKEN = getenv(
 
 # Only  Links formats are  accepted for this Var value.
 SUPPORT_CHANNEL = getenv(
-    "SUPPORT_CHANNEL", "https://t.me/TM_KARTAL"
+    "SUPPORT_CHANNEL", "https://t.me/ATRINMUSIC_TM"
 )  # Example:- https://t.me/TheTeamVivek
 SUPPORT_GROUP = getenv(
-    "SUPPORT_GROUP", "https://t.me/loggroupranger"
+    "SUPPORT_GROUP", "https://t.me/ATRINMUSIC_TM1"
 )  # Example:- https://t.me/TheTeamVk
 
 
@@ -106,7 +121,7 @@ AUTO_LEAVING_ASSISTANT = getenv("AUTO_LEAVING_ASSISTANT", False)
 
 # Time after which you're assistant account will leave chats automatically.
 AUTO_LEAVE_ASSISTANT_TIME = int(
-    getenv("ASSISTANT_LEAVE_TIME", 5800)
+    getenv("ASSISTANT_LEAVE_TIME", 1800)
 )  # Remember to give value in Seconds
 
 
@@ -122,7 +137,7 @@ TELEGRAM_DOWNLOAD_EDIT_SLEEP = int(getenv("TELEGRAM_EDIT_SLEEP", "5"))
 
 
 # Your Github Repo.. Will be shown on /start Command
-GITHUB_REPO = getenv("GITHUB_REPO", "https://github.com/TheTeamVivek/YukkiMusic")
+GITHUB_REPO = getenv("GITHUB_REPO", "")
 
 
 # Spotify Client.. Get it from https://developer.spotify.com/dashboard
@@ -162,17 +177,22 @@ SET_CMDS = getenv("SET_CMDS", "False")
 
 
 # You'll need a Pyrogram String Session for these vars. Generate String from our session generator bot @YukkiStringBot
-STRING_SESSIONS = list(map(str.strip, getenv("STRING_SESSIONS", None).split(",")))
 
 
 
+#  __     ___    _ _  ___  _______   __  __ _    _  _____ _____ _____
+#  \ \   / / |  | | |/ / |/ /_   _| |  \/  | |  | |/ ____|_   _/ ____|
+#   \ \_/ /| |  | | ' /| ' /  | |   | \  / | |  | | (___   | || |
+#    \   / | |  | |  < |  <   | |   | |\/| | |  | |\___ \  | || |
+#     | |  | |__| | . \| . \ _| |_  | |  | | |__| |____) |_| || |____
+#     |_|   \____/|_|\_\_|\_\_____| |_|  |_|\____/|_____/|_____\_____|
 
 
 ### DONT TOUCH or EDIT codes after this line
 BANNED_USERS = filters.user()
 YTDOWNLOADER = 1
 LOG = 2
-LOG_FILE_NAME = "Atro.txt"
+LOG_FILE_NAME = "logs.txt"
 TEMP_DB_FOLDER = "tempdb"
 adminlist = {}
 lyrical = {}
@@ -187,7 +207,7 @@ autoclean = []
 
 START_IMG_URL = getenv(
     "START_IMG_URL",
-    "https://te.legra.ph/file/4ec5ae4381dffb039b4ef.jpg",  # This is the file id of the photo you can also put the url of photo
+    "https://files.catbox.moe/dclvrs.mp4",
 )
 
 PING_IMG_URL = getenv(
@@ -197,22 +217,22 @@ PING_IMG_URL = getenv(
 
 PLAYLIST_IMG_URL = getenv(
     "PLAYLIST_IMG_URL",
-    "https://envs.sh/W_z.jpg",
+    "https://files.catbox.moe/670vyx.mp4",
 )
 
 GLOBAL_IMG_URL = getenv(
     "GLOBAL_IMG_URL",
-    "https://telegra.ph/file/de1db74efac1770b1e8e9.jpg",
+    "https://files.catbox.moe/76qvml.jpg",
 )
 
 STATS_IMG_URL = getenv(
     "STATS_IMG_URL",
-    "https://telegra.ph/file/4dd9e2c231eaf7c290404.jpg",
+    "https://files.catbox.moe/gy90nn.jpg",
 )
 
 TELEGRAM_AUDIO_URL = getenv(
     "TELEGRAM_AUDIO_URL",
-    "https://envs.sh/npk.jpg",
+    "https://files.catbox.moe/670vyx.mp4",
 )
 
 TELEGRAM_VIDEO_URL = getenv(
@@ -222,27 +242,27 @@ TELEGRAM_VIDEO_URL = getenv(
 
 STREAM_IMG_URL = getenv(
     "STREAM_IMG_URL",
-    "https://envs.sh/nAw.jpg",
+    "https://telegra.ph/file/e24f4a5f695ec5576a8f3.jpg",
 )
 
 SOUNCLOUD_IMG_URL = getenv(
     "SOUNCLOUD_IMG_URL",
-    "https://envs.sh/nAD.jpg",
+    "https://telegra.ph/file/7645d1e04021323c21db9.jpg",
 )
 
 YOUTUBE_IMG_URL = getenv(
     "YOUTUBE_IMG_URL",
-    "https://envs.sh/npl.jpg",
+    "https://telegra.ph/file/76d29aa31c40a7f026d7e.jpg",
 )
 
 SPOTIFY_ARTIST_IMG_URL = getenv(
     "SPOTIFY_ARTIST_IMG_URL",
-    "https://envs.sh/nA9.jpg",
+    "https://telegra.ph/file/b7758d4e1bc32aa9fb6ec.jpg",
 )
 
 SPOTIFY_ALBUM_IMG_URL = getenv(
     "SPOTIFY_ALBUM_IMG_URL",
-    "https://envs.sh/nps.jpg",
+    "https://telegra.ph/file/60ed85638e00df10985db.jpg",
 )
 
 SPOTIFY_PLAYLIST_IMG_URL = getenv(
@@ -254,12 +274,6 @@ SPOTIFY_PLAYLIST_IMG_URL = getenv(
 def time_to_seconds(time):
     stringt = str(time)
     return sum(int(x) * 60**i for i, x in enumerate(reversed(stringt.split(":"))))
-
-
-def seconds_to_time(seconds):
-    minutes = seconds // 60
-    remaining_seconds = seconds % 60
-    return f"{minutes:02d}:{remaining_seconds:02d}"
 
 
 DURATION_LIMIT = int(time_to_seconds(f"{DURATION_LIMIT_MIN}:00"))
@@ -295,7 +309,7 @@ if GITHUB_REPO:
 
 
 if PING_IMG_URL:
-    if PING_IMG_URL != "https://telegra.ph/file/91533956c91d0fd7c9f20.jpg":
+    if PING_IMG_URL != "https://files.catbox.moe/gy90nn.jpg":
         if not re.match("(?:http|https)://", PING_IMG_URL):
             print(
                 "[ERROR] - Your PING_IMG_URL url is wrong. Please ensure that it starts with https://"
@@ -303,7 +317,7 @@ if PING_IMG_URL:
             sys.exit()
 
 if PLAYLIST_IMG_URL:
-    if PLAYLIST_IMG_URL != "https://telegra.ph/file/f4edfbd83ec3150284aae.jpg":
+    if PLAYLIST_IMG_URL != "https://files.catbox.moe/76qvml.jpg":
         if not re.match("(?:http|https)://", PLAYLIST_IMG_URL):
             print(
                 "[ERROR] - Your PLAYLIST_IMG_URL url is wrong. Please ensure that it starts with https://"
@@ -329,7 +343,7 @@ if STATS_IMG_URL:
 
 
 if TELEGRAM_AUDIO_URL:
-    if TELEGRAM_AUDIO_URL != "https://telegra.ph/file/8234d704952738ebcda7f.jpg":
+    if TELEGRAM_AUDIO_URL != "https://files.catbox.moe/lw6h3k.mp4":
         if not re.match("(?:http|https)://", TELEGRAM_AUDIO_URL):
             print(
                 "[ERROR] - Your TELEGRAM_AUDIO_URL url is wrong. Please ensure that it starts with https://"
@@ -364,7 +378,7 @@ if YOUTUBE_IMG_URL:
 
 
 if TELEGRAM_VIDEO_URL:
-    if TELEGRAM_VIDEO_URL != "https://telegra.ph/file/8d02ff3bde400e465219a.jpg":
+    if TELEGRAM_VIDEO_URL != "https://files.catbox.moe/pfiska.mp4":
         if not re.match("(?:http|https)://", TELEGRAM_VIDEO_URL):
             print(
                 "[ERROR] - Your TELEGRAM_VIDEO_URL url is wrong. Please ensure that it starts with https://"
