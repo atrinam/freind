@@ -20,15 +20,14 @@ OWNER_ID = list(map(int, getenv("OWNER_ID", "1303275036").split()))
 
 
 # خواندن STRING_SESSIONS و تقسیم آن به لیستی از سشن‌ها
-sessions = getenv("STRING_SESSIONS", "").split()
+STRING_SESSIONS = getenv("STRING_SESSIONS", "").split()
 
-# تعریف متغیرهای STRING1 تا STRING5
-STRING1 = sessions[0] if len(sessions) >= 1 else None
-STRING2 = sessions[1] if len(sessions) >= 2 else None
-STRING3 = sessions[2] if len(sessions) >= 3 else None
-STRING4 = sessions[3] if len(sessions) >= 4 else None
-STRING5 = sessions[4] if len(sessions) >= 5 else None
-
+# تعریف سشن‌های مجزا
+STRING1 = STRING_SESSIONS[0] if len(STRING_SESSIONS) >= 1 else None 
+STRING2 = STRING_SESSIONS[1] if len(STRING_SESSIONS) >= 2 else None
+STRING3 = STRING_SESSIONS[2] if len(STRING_SESSIONS) >= 3 else None
+STRING4 = STRING_SESSIONS[3] if len(STRING_SESSIONS) >= 4 else None
+STRING5 = STRING_SESSIONS[4] if len(STRING_SESSIONS) >= 5 else None
 
 CLEANMODE_DELETE_MINS = int(
     getenv("CLEANMODE_MINS", "5")
